@@ -1,0 +1,18 @@
+services:
+  air_control:
+    container_name: air_control
+    mem_limit: 128M
+    build:
+      context: ./
+      dockerfile: ./air_control/Dockerfile
+    devices:
+      - /dev/gpiomem:/dev/gpiomem
+      - /dev/gpiochip0:/dev/gpiochip0
+      - /dev/gpiochip1:/dev/gpiochip1
+    environment:
+      - PYTHONUNBUFFERED=1
+      - LOG_LEVEL=debug
+      - TZ=Europe/Warsaw
+    volumes:
+      - ./logs:/var/logs
+    restart: always
