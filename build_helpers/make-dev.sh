@@ -22,3 +22,7 @@ do
   echo "Installing module $module"
   python -m pip install -e "./$module" -q
 done
+
+echo "Installing pre-commit"
+python -m pip install pre-commit
+pre-commit install -c .pre-commit-config.yaml

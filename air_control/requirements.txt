@@ -1,0 +1,6 @@
+pydantic==2.7.4
+python-dotenv~=1.0
+w1thermsensor~=2.3.0
+gpiozero==2.0.1
+lgpio==0.2.2.0
+schedule==1.2.2

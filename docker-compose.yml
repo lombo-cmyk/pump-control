@@ -15,4 +15,5 @@ services:
       - TZ=Europe/Warsaw
     volumes:
       - ./logs:/var/logs
+      - .env:/usr/src/app/config/.env
     restart: always
