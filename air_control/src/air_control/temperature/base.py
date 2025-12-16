@@ -3,8 +3,8 @@ import logging
 
 class BaseTemperature:
 
-    def __init__(self, pin: int, logger: logging.Logger):
-        self.pin = pin
+    def __init__(self, device_id: str, logger: logging.Logger):
+        self.device_id = device_id
         self.logger = logger
 
     def get_temperature(self) -> float:

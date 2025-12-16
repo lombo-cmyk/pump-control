@@ -6,6 +6,7 @@ import schedule
 from air_control.actuator.base import BaseActuator
 from air_control.actuator.mock import MockActuator
 from air_control.temperature.base import BaseTemperature
+from air_control.temperature.device import TemperatureReader
 from air_control.temperature.mock import MockTemperature
 from air_control.utils.env import config
 
@@ -50,13 +51,14 @@ class Service:
         return self._get_temperature("OUT")
 
     def _get_actuator(self, where: str) -> BaseActuator:
+        dev_pin = config[f"{where}_ACTUATOR_PIN"]
         if config[f"{where}_ACTUATOR"] is True:
             self.logger.error("Real actuator not yet implemented")
             raise NotImplementedError
-        return MockActuator(config[f"{where}_ACTUATOR_PIN"], self.logger)
+        return MockActuator(dev_pin, self.logger)
 
     def _get_temperature(self, where: str) -> BaseTemperature:
+        dev_id = config[f"TEMPERATURE_{where}_ID"]
         if config[f"TEMPERATURE_{where}"] is True:
-            self.logger.error(f"Real Temperature {where} not yet implemented")
-            raise NotImplementedError
-        return MockTemperature(config[f"TEMPERATURE_{where}_PIN"], self.logger)
+            return TemperatureReader(dev_id, self.logger)
+        return MockTemperature(dev_id, self.logger)
